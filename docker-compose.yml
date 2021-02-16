@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:9.6.6
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=javamelodydb
+    ports:
+      - "5530:5532"
+    networks:
+      - sales-network
+  sales-core:
+    image: cuba-sample-sales-core
+    networks:
+      - sales-network
+  sales-web:
+    image: cuba-sample-sales-web
+    ports:
+      - "8080:8080"
+    networks:
+      - sales-network
+
+networks:
+  sales-network:
