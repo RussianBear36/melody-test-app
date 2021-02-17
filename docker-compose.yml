@@ -15,10 +15,16 @@ services:
       - CUBA_DATASOURCE_PASSWORD=1234
       - CUBA_DATASOURCE_USER=postgres
       - CUBA_DATASOURCE_DBNAME=javamelodydb
+      - CUBA_CLUSTER_ENABLED=true
+      - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
+    ports:
+    - "8079:8079"
   sales-web:
     image: cuba-sample-sales-web
     environment:
-      - CUBA_CONNECTIONURLLIST=http://sales-core:8080/app-core
+      - CUBA_CONNECTIONURLLIST=http://sales-core:8079/app-core, http://sales-core1:8079/app-core
       - CUBA_USELOCALSERVICEINVOCATION=false
+
     ports:
       - "8080:8080"
+
