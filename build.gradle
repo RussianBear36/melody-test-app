@@ -169,9 +169,5 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 restart.finalizedBy start
 
 task buildUberJar(type: CubaUberJarBuilding) {
-    appProperties = ['cuba.automaticDatabaseUpdate'  : true,
-                     'cuba.webHostName'              : 'app1-core',
-                     'cuba.connectionUrlList'        : 'http://app1-core:8079/app-core',
-                     'cuba.webAppUrl'                : 'http://app1-web:8080/app',
-                     'cuba.useLocalServiceInvocation': false]
+    appProperties = ['cuba.automaticDatabaseUpdate': true]
 }

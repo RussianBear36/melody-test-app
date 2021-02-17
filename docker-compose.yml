@@ -7,20 +7,18 @@ services:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_USER=postgres
       - POSTGRES_DB=javamelodydb
-    ports:
-      - "5530:5533"
-    networks:
-      - sales-network
   sales-core:
     image: cuba-sample-sales-core
-    networks:
-      - sales-network
+    environment:
+      - CUBA_DATASOURCE_HOST=postgres
+      - CUBA_DATASOURCE_PORT=5432
+      - CUBA_DATASOURCE_PASSWORD=1234
+      - CUBA_DATASOURCE_USER=postgres
+      - CUBA_DATASOURCE_DBNAME=javamelodydb
   sales-web:
     image: cuba-sample-sales-web
+    environment:
+      - CUBA_CONNECTIONURLLIST=http://sales-core:8080/app-core
+      - CUBA_USELOCALSERVICEINVOCATION=false
     ports:
       - "8080:8080"
-    networks:
-      - sales-network
-
-networks:
-  sales-network:
