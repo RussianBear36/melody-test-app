@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - sales-web
+      - sales-web1
+    volumes:
+      - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+    - 80:80
+
   postgres:
     image: postgres:9.6.6
     environment:
@@ -18,7 +28,7 @@ services:
       - CUBA_CLUSTER_ENABLED=true
       - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
     ports:
-    - "8079:8079"
+    - 8079:8079
   sales-web:
     image: cuba-sample-sales-web
     environment:
@@ -26,7 +36,7 @@ services:
       - CUBA_USELOCALSERVICEINVOCATION=false
 
     ports:
-      - "8080:8080"
+      - 8080:8080
   sales-core1:
     image: cuba-sample-sales-core
     environment:
@@ -38,12 +48,12 @@ services:
       - CUBA_CLUSTER_ENABLED=true
       - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
     ports:
-      - "8078:8079"
+      - 8078:8079
   sales-web1:
     image: cuba-sample-sales-web
     environment:
       - CUBA_CONNECTIONURLLIST=http://sales-core:8079/app-core, http://sales-core1:8079/app-core
       - CUBA_USELOCALSERVICEINVOCATION=false
-
     ports:
-      - "8081:8080"
+      - 8081:8080
+
