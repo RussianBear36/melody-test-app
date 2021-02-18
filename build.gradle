@@ -35,7 +35,6 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent('com.haulmont.addon.cubajm:cuba-jm-global:0.7.1')
 }
 
 def postgres = 'org.postgresql:postgresql:42.2.9'
@@ -172,4 +171,41 @@ task buildUberJar(type: CubaUberJarBuilding) {
     appProperties = ['cuba.automaticDatabaseUpdate'     : true,
                      'cuba.connectionUrlList'           : 'http://sales-core:8079/app-core',
                      'cuba.trustedClientPermittedIpList': '172.19.0.4, 127.0.0.1, *.*.*.*']
+}
+
+
+def webJarFileName = "$buildDir/distributions/uberJar/app.jar"
+def coreJarFileName = "$buildDir/distributions/uberJar/app-core.jar"
+
+def webImagePath = "$projectDir/docker-image/web"
+def coreImagePath = "$projectDir/docker-image/core"
+
+def webImageName = "cuba-sample-sales-web"
+def coreImageName = "cuba-sample-sales-core"
+
+task moveJars{
+    doLast {
+        if (file(webJarFileName).exists()){
+            ant.move file: webJarFileName,
+                    todir: webImagePath
+        }
+
+        if (file(coreJarFileName).exists()){
+            ant.move file: coreJarFileName,
+                    todir: coreImagePath
+        }
+    }
+}
+
+task createWebDockerImages(type: Exec) {
+    workingDir("$projectDir/docker-image/")
+
+    executable 'docker build -t cuba-sample-sales-core ./core'
+
+
+}
+
+
+task deployDockerCompose(type: DefaultTask, dependsOn: buildUberJar){
+    dependsOn moveJars
 }
