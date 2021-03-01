@@ -35,6 +35,8 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+    //---------
+    //---------
 }
 
 def postgres = 'org.postgresql:postgresql:42.2.9'
@@ -49,6 +51,7 @@ configure([globalModule, coreModule, webModule]) {
         testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
         testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
         testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
+//        compile('com.haulmont.addon.cubajm:cuba-jm-global:0.7-SNAPSHOT')
     }
 
     task sourceJar(type: Jar) {
