@@ -35,6 +35,7 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+    appComponent('com.haulmont.addon.cubajm:cuba-jm-test-global:0.7-SNAPSHOT')
     //---------
     //---------
 }
@@ -47,7 +48,7 @@ configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'cuba')
 
     dependencies {
-        compile('net.bull.javamelody:javamelody-core:1.86.0')
+//        compile('net.bull.javamelody:javamelody-core:1.86.0')
         testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
         testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
         testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')

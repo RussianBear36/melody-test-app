@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 
-@Component("javamelody_AppLifecycleEventListenerWeb_ApplicationContextListener")
+//@Component("javamelody_AppLifecycleEventListenerWeb_ApplicationContextListener")
 public class AppLifecycleEventListenerWeb {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(AppLifecycleEventListenerWeb.class);

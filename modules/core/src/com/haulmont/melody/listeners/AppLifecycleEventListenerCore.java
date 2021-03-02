@@ -14,7 +14,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.UUID;
 
-@Component("javamelody_AppLifecycleEventListenerCore_ApplicationContextListener")
+//@Component("javamelody_AppLifecycleEventListenerCore_ApplicationContextListener")
 public class AppLifecycleEventListenerCore {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(AppLifecycleEventListenerCore.class);
