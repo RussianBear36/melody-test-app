@@ -36,8 +36,6 @@ cuba {
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
     appComponent('com.haulmont.addon.cubajm:cuba-jm-test-global:0.7-SNAPSHOT')
-    //---------
-    //---------
 }
 
 def postgres = 'org.postgresql:postgresql:42.2.9'
