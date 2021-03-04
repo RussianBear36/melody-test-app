@@ -4,6 +4,8 @@ services:
   nginx:
     image: nginx:latest
     depends_on:
+      - sales-core
+      - sales-core1
       - sales-web
       - sales-web1
     volumes:
