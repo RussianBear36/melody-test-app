@@ -8,4 +8,5 @@ deploy/*
 modules/*/build/*
 .idea/*
 out
-test-run
+test-rug
+docker-image/*

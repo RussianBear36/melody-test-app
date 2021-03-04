@@ -16,13 +16,13 @@ services:
       - 1337:1337
 
   postgres:
-    image: postgres:9.6.6
+    image: library/postgres:12.6
     environment:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_USER=postgres
       - POSTGRES_DB=javamelodydb
     ports:
-    - 5432:5432
+    - 5433:5432
   sales-core:
     image: cuba-sample-sales-core
     environment:
@@ -33,6 +33,9 @@ services:
       - CUBA_DATASOURCE_DBNAME=javamelodydb
       - CUBA_CLUSTER_ENABLED=true
       - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
+      - CUBA_WEBHOSTNAME=sales-core
+      - CUBA_WEBPORT=8079
+      - CUBA_WEBCONTEXTNAME=app-core
   sales-web:
     image: cuba-sample-sales-web
     environment:
@@ -42,13 +45,16 @@ services:
   sales-core1:
     image: cuba-sample-sales-core
     environment:
-      - CUBA_DATASOURCE_HOST=postgres
+      - CUBA_DATASOURCE_HOST=postgres #postgres
       - CUBA_DATASOURCE_PORT=5432
       - CUBA_DATASOURCE_PASSWORD=1234
       - CUBA_DATASOURCE_USER=postgres
       - CUBA_DATASOURCE_DBNAME=javamelodydb
       - CUBA_CLUSTER_ENABLED=true
       - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
+      - CUBA_WEBHOSTNAME=sales-core1
+      - CUBA_WEBPORT=8079
+      - CUBA_WEBCONTEXTNAME=app-core
   sales-web1:
     image: cuba-sample-sales-web
     environment:
