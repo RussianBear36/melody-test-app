@@ -16,7 +16,7 @@
     <!--Application components-->
     <context-param>
         <param-name>appComponents</param-name>
-        <param-value>com.haulmont.cuba</param-value>
+        <param-value>com.haulmont.cuba com.haulmont.addon.cubajm</param-value>
     </context-param>
     <listener>
         <listener-class>com.haulmont.cuba.core.sys.AppContextLoader</listener-class>
@@ -36,6 +36,10 @@
         <filter-name>javamelody</filter-name>
         <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
         <async-supported>true</async-supported>
+        <init-param>
+            <param-name>monitoring-path</param-name>
+            <param-value>/app-core/monitoring</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>javamelody</filter-name>

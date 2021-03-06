@@ -6,6 +6,7 @@ services:
     depends_on:
       - sales-web
       - sales-web1
+      - sales-web2
     volumes:
       - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
@@ -16,13 +17,13 @@ services:
       - 1337:1337
 
   postgres:
-    image: postgres:9.6.6
+    image: library/postgres:12.6
     environment:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_USER=postgres
       - POSTGRES_DB=javamelodydb
     ports:
-    - 5432:5432
+    - 5433:5432
   sales-core:
     image: cuba-sample-sales-core
     environment:
@@ -31,27 +32,56 @@ services:
       - CUBA_DATASOURCE_PASSWORD=1234
       - CUBA_DATASOURCE_USER=postgres
       - CUBA_DATASOURCE_DBNAME=javamelodydb
-      - CUBA_CLUSTER_ENABLED=true
+#      - CUBA_CLUSTER_ENABLED=true
       - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
+      - CUBA_WEBHOSTNAME=sales-core
+      - CUBA_WEBPORT=8079
+      - CUBA_WEBCONTEXTNAME=app-core
+#      - CUBA.CLUSTER.JGROUPSCONFIG=/my_jgroups_tcp.xml
   sales-web:
     image: cuba-sample-sales-web
     environment:
-      - CUBA_CONNECTIONURLLIST=http://sales-core:8079/app-core, http://sales-core1:8079/app-core
+      - CUBA_CONNECTIONURLLIST=http://sales-core:8079/app-core, http://sales-core1:8079/app-core, http://sales-core2:8079/app-core
       - CUBA_USELOCALSERVICEINVOCATION=false
 
   sales-core1:
     image: cuba-sample-sales-core
     environment:
-      - CUBA_DATASOURCE_HOST=postgres
+      - CUBA_DATASOURCE_HOST=postgres #postgres
       - CUBA_DATASOURCE_PORT=5432
       - CUBA_DATASOURCE_PASSWORD=1234
       - CUBA_DATASOURCE_USER=postgres
       - CUBA_DATASOURCE_DBNAME=javamelodydb
-      - CUBA_CLUSTER_ENABLED=true
+#      - CUBA_CLUSTER_ENABLED=true
       - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
+      - CUBA_WEBHOSTNAME=sales-core1
+      - CUBA_WEBPORT=8079
+      - CUBA_WEBCONTEXTNAME=app-core
+#      - CUBA.CLUSTER.JGROUPSCONFIG=/my_jgroups_tcp.xml
   sales-web1:
     image: cuba-sample-sales-web
     environment:
-      - CUBA_CONNECTIONURLLIST=http://sales-core:8079/app-core, http://sales-core1:8079/app-core
+      - CUBA_CONNECTIONURLLIST=http://sales-core:8079/app-core, http://sales-core1:8079/app-core, http://sales-core2:8079/app-core
       - CUBA_USELOCALSERVICEINVOCATION=false
+
+
+  sales-core2:
+      image: cuba-sample-sales-core
+      environment:
+        - CUBA_DATASOURCE_HOST=postgres #postgres
+        - CUBA_DATASOURCE_PORT=5432
+        - CUBA_DATASOURCE_PASSWORD=1234
+        - CUBA_DATASOURCE_USER=postgres
+        - CUBA_DATASOURCE_DBNAME=javamelodydb
+#        - CUBA_CLUSTER_ENABLED=true
+        - CUBA_TRUSTEDCLIENTPERMITTEDIPLIST=*.*.*.*
+        - CUBA_WEBHOSTNAME=sales-core2
+        - CUBA_WEBPORT=8079
+        - CUBA_WEBCONTEXTNAME=app-core
+      #      - CUBA.CLUSTER.JGROUPSCONFIG=/my_jgroups_tcp.xml
+  sales-web2:
+      image: cuba-sample-sales-web
+      environment:
+        - CUBA_CONNECTIONURLLIST=http://sales-core:8079/app-core, http://sales-core1:8079/app-core, http://sales-core2:8079/app-core
+        - CUBA_USELOCALSERVICEINVOCATION=false
 
