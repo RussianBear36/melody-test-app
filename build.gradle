@@ -173,6 +173,7 @@ task buildUberJar(type: CubaUberJarBuilding) {
     appProperties = ['cuba.automaticDatabaseUpdate'     : true,
                      'cuba.connectionUrlList'           : 'http://sales-core:8079/app-core, http://sales-core1:8079/app-core',
                      'cuba.trustedClientPermittedIpList': '172.19.0.4, 127.0.0.1, *.*.*.*']
+    webJettyConfPath = 'jetty.xml'
 }
 
 

@@ -19,9 +19,11 @@
         xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/jgroups.xsd">
 
     <!-- TCP based stack -->
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!--    GMS: address=f8f24e3a4808-45467, cluster=cubaCluster, physical address=172.27.0.4:7800-->
 
     <TCP bind_port="8079"
-         bind_addr="SITE_LOCAL"
+         bind_addr="LINK_LOCAL"
          recv_buf_size="${tcp.recv_buf_size:5M}"
          send_buf_size="${tcp.send_buf_size:5M}"
          max_bundle_size="64K"

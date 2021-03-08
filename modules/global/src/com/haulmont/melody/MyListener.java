@@ -1,5 +1,9 @@
 package com.haulmont.melody;
 
+import com.haulmont.cuba.core.sys.remoting.ClusteredHttpInvokerRequestExecutor;
+import com.haulmont.cuba.core.sys.remoting.CubaRemoteInvocation;
+import com.haulmont.cuba.core.sys.remoting.HttpServiceProxy;
+
 //@Component
 public class MyListener{
 //
@@ -16,8 +20,11 @@ public class MyListener{
 
 
 
-
-
+//void ggg() {
+//    ClusteredHttpInvokerRequestExecutor;
+//    HttpServiceProxy;
+//    CubaRemoteInvocation;
+//}
 
 
 //    implements AppContext.Listener
