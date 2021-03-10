@@ -6,8 +6,15 @@
 #docker build -t cuba-sample-sales-web ./web
 
 
-gradle buildUberJar
-gradle moveJars
+#gradle buildUberJar
+#gradle moveJars
+#cd docker-image
+#docker build -t javamelody ./javamelody #build image for javaMelody WAR-collect server
+#docker build -t cuba-sample-sales-singlejar ./singlejar
+
+gradle buildUberWar
+gradle moveWars
 cd docker-image
 docker build -t javamelody ./javamelody #build image for javaMelody WAR-collect server
-docker build -t cuba-sample-sales-singlejar ./singlejar
+docker build -t cuba-sample-sales-corewar ./corewar
+docker build -t cuba-sample-sales-webwar ./webwar

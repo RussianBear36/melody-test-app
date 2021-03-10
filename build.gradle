@@ -179,6 +179,17 @@ task buildUberJar(type: CubaUberJarBuilding) {
     singleJar=true
 }
 
+task buildUberWar(type: CubaWarBuilding) {
+    appProperties = ['cuba.automaticDatabaseUpdate'     : true,
+                     'cuba.connectionUrlList'           : 'http://sales-core:8079/app-core, http://sales-core1:8079/app-core',
+                     'cuba.trustedClientPermittedIpList': '172.19.0.4, 127.0.0.1, *.*.*.*']
+    singleWar=false
+}
+def webWarFileName = "$buildDir/distributions/war/app.war"
+def coreWarFileName = "$buildDir/distributions/war/app-core.war"
+def webWarImagePath = "$projectDir/docker-image/webwar"
+def coreWarImagePath = "$projectDir/docker-image/corewar"
+
 
 def webJarFileName = "$buildDir/distributions/uberJar/app.jar"
 def coreJarFileName = "$buildDir/distributions/uberJar/app-core.jar"
@@ -209,6 +220,21 @@ task moveJars {
         }
     }
 }
+
+task moveWars {
+        doLast {
+        if (file(webWarFileName).exists()) {
+            ant.move file: webWarFileName,
+                    todir: webWarImagePath
+        }
+
+        if (file(coreWarFileName).exists()) {
+            ant.move file: coreWarFileName,
+                    todir: coreWarImagePath
+        }
+    }
+}
+
 
 //task createWebDockerImages(type: Exec) {
 //    workingDir("$projectDir/docker-image/")
