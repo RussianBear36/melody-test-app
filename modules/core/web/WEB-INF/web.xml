@@ -33,35 +33,31 @@
         <url-pattern>/remoting/*</url-pattern>
     </servlet-mapping>
 
-<!--    Error 503-->
 <!--    <filter>-->
-<!--        <filter-name>cuba_filter</filter-name>-->
-<!--        <filter-class>com.haulmont.cuba.web.sys.CubaHttpFilter</filter-class>-->
+<!--        <filter-name>javamelody</filter-name>-->
+<!--        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>-->
 <!--        <async-supported>true</async-supported>-->
 <!--    </filter>-->
 <!--    <filter-mapping>-->
-<!--        <filter-name>cuba_filter</filter-name>-->
+<!--        <filter-name>javamelody</filter-name>-->
 <!--        <url-pattern>/*</url-pattern>-->
+<!--        <dispatcher>REQUEST</dispatcher>-->
+<!--        <dispatcher>ASYNC</dispatcher>-->
 <!--    </filter-mapping>-->
 
+<!--    <filter>-->
+<!--        <filter-name>javamelody_security</filter-name>-->
+<!--        <filter-class>com.haulmont.addon.cubajm.JavaMelodySecurityFilter</filter-class>-->
+<!--        <async-supported>true</async-supported>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>javamelody_security</filter-name>-->
+<!--        <url-pattern>/app-core</url-pattern>-->
+<!--        <dispatcher>REQUEST</dispatcher>-->
+<!--        <dispatcher>ASYNC</dispatcher>-->
+<!--    </filter-mapping>-->
 
-    <filter>
-        <filter-name>javamelody</filter-name>
-        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-        <async-supported>true</async-supported>
-<!--        <init-param>-->
-<!--            <param-name>monitoring-path</param-name>-->
-<!--            <param-value>/core-jm/</param-value>-->
-<!--&lt;!&ndash;            <param-value>/app-core/monitoring</param-value>&ndash;&gt;-->
-<!--        </init-param>-->
-    </filter>
-    <filter-mapping>
-        <filter-name>javamelody</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>ASYNC</dispatcher>
-    </filter-mapping>
-    <listener>
-        <listener-class>net.bull.javamelody.SessionListener</listener-class>
-    </listener>
+<!--    <listener>-->
+<!--        <listener-class>net.bull.javamelody.SessionListener</listener-class>-->
+<!--    </listener>-->
 </web-app>

@@ -52,18 +52,41 @@
         <filter-name>cuba_filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <filter>
-        <filter-name>javamelody</filter-name>
-        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-        <async-supported>true</async-supported>
-    </filter>
-    <filter-mapping>
-        <filter-name>javamelody</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>ASYNC</dispatcher>
-    </filter-mapping>
-    <listener>
-        <listener-class>net.bull.javamelody.SessionListener</listener-class>
-    </listener>
+
+
+<!--    <filter>-->
+<!--        <filter-name>javamelody</filter-name>-->
+<!--        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>-->
+<!--        <async-supported>true</async-supported>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>javamelody</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--        <dispatcher>REQUEST</dispatcher>-->
+<!--        <dispatcher>ASYNC</dispatcher>-->
+<!--    </filter-mapping>-->
+
+<!--    <filter>-->
+<!--        <filter-name>javamelody_security</filter-name>-->
+<!--        <filter-class>com.haulmont.addon.cubajm.JavaMelodySecurityFilter</filter-class>-->
+<!--        <async-supported>true</async-supported>-->
+<!--&lt;!&ndash;        <init-param>&ndash;&gt;-->
+<!--&lt;!&ndash;            <param-name>login</param-name>&ndash;&gt;-->
+<!--&lt;!&ndash;            <param-value>admin</param-value>&ndash;&gt;-->
+<!--&lt;!&ndash;        </init-param>&ndash;&gt;-->
+<!--&lt;!&ndash;        <init-param>&ndash;&gt;-->
+<!--&lt;!&ndash;            <param-name>password</param-name>&ndash;&gt;-->
+<!--&lt;!&ndash;            <param-value>admin</param-value>&ndash;&gt;-->
+<!--&lt;!&ndash;        </init-param>&ndash;&gt;-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>javamelody_security</filter-name>-->
+<!--        <url-pattern>/app/</url-pattern>-->
+<!--        <dispatcher>REQUEST</dispatcher>-->
+<!--        <dispatcher>ASYNC</dispatcher>-->
+<!--    </filter-mapping>-->
+
+<!--    <listener>-->
+<!--        <listener-class>net.bull.javamelody.SessionListener</listener-class>-->
+<!--    </listener>-->
 </web-app>
