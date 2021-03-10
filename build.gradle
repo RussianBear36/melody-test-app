@@ -169,57 +169,12 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 }
 restart.finalizedBy start
 
-task buildUberJar(type: CubaUberJarBuilding) {
-//    appProperties = ['cuba.automaticDatabaseUpdate'     : true,
-//                     'cuba.connectionUrlList'           : 'http://sales-core:8079/app-core, http://sales-core1:8079/app-core',
-//                     'cuba.trustedClientPermittedIpList': '172.19.0.4, 127.0.0.1, *.*.*.*']
-    appProperties = ['cuba.automaticDatabaseUpdate'     : true,
-                     'cuba.connectionUrlList'           : 'http://sales-core:8079/app-core',
-                     'cuba.trustedClientPermittedIpList': '172.19.0.4, 127.0.0.1, *.*.*.*']
-    singleJar=true
-}
-
-task buildUberWar(type: CubaWarBuilding) {
-    appProperties = ['cuba.automaticDatabaseUpdate'     : true,
-                     'cuba.connectionUrlList'           : 'http://sales-core:8079/app-core, http://sales-core1:8079/app-core',
-                     'cuba.trustedClientPermittedIpList': '172.19.0.4, 127.0.0.1, *.*.*.*']
-    singleWar=false
-}
 def webWarFileName = "$buildDir/distributions/war/app.war"
 def coreWarFileName = "$buildDir/distributions/war/app-core.war"
+
 def webWarImagePath = "$projectDir/docker-image/webwar"
 def coreWarImagePath = "$projectDir/docker-image/corewar"
 
-
-def webJarFileName = "$buildDir/distributions/uberJar/app.jar"
-def coreJarFileName = "$buildDir/distributions/uberJar/app-core.jar"
-def singleJarFileName = "$buildDir/distributions/uberJar/app.jar"
-
-def webImagePath = "$projectDir/docker-image/web"
-def coreImagePath = "$projectDir/docker-image/core"
-def singleJarImagePath = "$projectDir/docker-image/singleJar"
-
-def webImageName = "cuba-sample-sales-web"
-def coreImageName = "cuba-sample-sales-core"
-def singleJarImageName = "cuba-sample-sales-singlejar"
-
-task moveJars {
-    doLast {
-//        if (file(webJarFileName).exists()) {
-//            ant.move file: webJarFileName,
-//                    todir: webImagePath
-//        }
-//
-//        if (file(coreJarFileName).exists()) {
-//            ant.move file: coreJarFileName,
-//                    todir: coreImagePath
-//        }
-        if (file(singleJarFileName).exists()) {
-            ant.move file: singleJarFileName,
-                    todir: singleJarImagePath
-        }
-    }
-}
 
 task moveWars {
         doLast {
@@ -244,3 +199,10 @@ task moveWars {
 //task deployDockerCompose(type: DefaultTask, dependsOn: buildUberJar) {
 //    dependsOn moveJars
 //}
+
+task buildWar(type: CubaWarBuilding) {
+    includeJdbcDriver = true
+    singleWar = false
+    appProperties = ['cuba.automaticDatabaseUpdate': true]
+    logbackConfigurationFile = 'etc/war-logback.xml'
+}
