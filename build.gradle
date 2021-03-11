@@ -50,9 +50,14 @@ configure([globalModule, coreModule, webModule]) {
         testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
         testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
         testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
+        compile('com.haulmont.addon.cubajm:cuba-jm-test-global:0.7-SNAPSHOT')
+//        runtime('javax.xml.bind:jaxb-api:2.3.1')
+//        runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
+
+
     }
 
-    task sourceJar(type: Jar) {
+    task sourceJar(type: War) {
         from file('src')
         classifier = 'sources'
     }
@@ -72,6 +77,7 @@ configure(globalModule) {
             runtime('javax.xml.bind:jaxb-api:2.3.1')
             runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
         }
+        compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
     }
 
     entitiesEnhancing {
@@ -90,7 +96,8 @@ configure(coreModule) {
 
     dependencies {
         compile(globalModule)
-        compileOnly(servletApi)
+//        compileOnly(servletApi)
+        compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
         jdbc(postgres)
         testRuntime(postgres)
     }
@@ -117,7 +124,8 @@ configure(webModule) {
     }
 
     dependencies {
-        compileOnly(servletApi)
+//        compileOnly(servletApi)
+        compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
         compile(globalModule)
     }
 
@@ -172,8 +180,8 @@ restart.finalizedBy start
 def webWarFileName = "$buildDir/distributions/war/app.war"
 def coreWarFileName = "$buildDir/distributions/war/app-core.war"
 
-def webWarImagePath = "$projectDir/docker-image/webwar"
-def coreWarImagePath = "$projectDir/docker-image/corewar"
+def webWarImagePath = "$projectDir/docker-image/jetty/webwar"
+def coreWarImagePath = "$projectDir/docker-image/jetty/corewar"
 
 
 task moveWars {
@@ -202,7 +210,14 @@ task moveWars {
 
 task buildWar(type: CubaWarBuilding) {
     includeJdbcDriver = true
+    includeContextXml = true
     singleWar = false
-    appProperties = ['cuba.automaticDatabaseUpdate': true]
-    logbackConfigurationFile = 'etc/war-logback.xml'
+    appProperties = [
+            'cuba.automaticDatabaseUpdate': true,
+            'cuba.webPort': 8080,
+            'cuba.connectionUrlList': 'http://localhost:8079/app-core'
+    ]
+//    logbackConfigurationFile = 'etc/war-logback.xml'
+//    coreWebXmlPath = 'modules/core/web/WEB-INF/web.xml'
+//    webWebXmlPath = 'modules/web/web/WEB-INF/web.xml'
 }
