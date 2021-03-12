@@ -18,24 +18,29 @@
         <param-name>appComponents</param-name>
         <param-value>com.haulmont.cuba com.haulmont.addon.cubajm</param-value>
     </context-param>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value></param-value>
-    </context-param>
+<!--    <context-param>-->
+<!--        <param-name>contextConfigLocation</param-name>-->
+<!--        <param-value></param-value>-->
+<!--    </context-param>-->
     <listener>
         <listener-class>com.haulmont.cuba.core.sys.AppContextLoader</listener-class>
     </listener>
 
-    <servlet>
-        <servlet-name>remoting</servlet-name>
-        <servlet-class>com.haulmont.cuba.core.sys.remoting.RemotingServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <context-param>
+        <param-name>logbackDisableServletContainerInitializer</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
-    <servlet-mapping>
-        <servlet-name>remoting</servlet-name>
-        <url-pattern>/remoting/*</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>remoting</servlet-name>-->
+<!--        <servlet-class>com.haulmont.cuba.core.sys.remoting.RemotingServlet</servlet-class>-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>remoting</servlet-name>-->
+<!--        <url-pattern>/remoting/*</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 <!--    <filter>-->
 <!--        <filter-name>javamelody</filter-name>-->
